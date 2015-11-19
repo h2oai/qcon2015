@@ -5,7 +5,13 @@
  - Oracle Java 7+ 
  - [Spark 1.5.1](http://spark.apache.org/downloads.html) 
  - [Sparkling Water 1.5.6](http://h2o-release.s3.amazonaws.com/sparkling-water/rel-1.5/6/index.html)
- - [SMS dataset](https://raw.githubusercontent.com/h2oai/sparkling-water/master/examples/smalldata/smsData.txt) 
+ - [SMS dataset](../data/smsData.txt) 
+ 
+
+## Goal
+ - use Spark API
+ - use Sparkling Water API
+ - be familiar with Spark shell
  
 ## Machine Learning Workflow
 
@@ -243,4 +249,9 @@
    ```
 
 15. At this point, you have finished your 1st Sparkling Water Machine Learning application. Hack and enjoy! Thank you!   
+
+
+## Exercise
+ - try to use different H2O model - for example, GBM
+ 
 

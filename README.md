@@ -7,16 +7,22 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
     - How to integrate the scoring engine from your Sparkling Water script into Spark Streaming to produce real-time predictions.
     - How to deploy smarter applications in Databricks' platform.
 
-1. [Sparkling Water Introduction](01-sparkling-water-intro/README.md)
-    - Setup and Installation of Sparkling Water
+## Outline 
+
+1. [Spark & Sparkling Water Introduction](01-sparkling-water-intro/README.md)
+    - Installation and setup of Spark
+      - Running Spark shell (TODO simple example)
+    - Installation and setup of Sparkling Water
     - Basic architecture and overview of functionalities
-    - Hands on demostration of Sparkling Water
-2. [Spam Detector](02-ham-or-spam/README.md)
+    - Hands on demonstration of Sparkling Water
+      - Running Sparkling Shell      
+2. [Simple Spam Detector](02-ham-or-spam/README.md)
     - Use Spark to tokenize text
     - Use MLlib's TF-IDF model to transform the data into a table
     - Build GBM model to label incoming text as spam or not spam (ham)
 3. [Ask Craig(list) Application](03-ask-craig/README.md)
     - Build a classifier to label job description into appropriate industry categories
+    - Deploy it as Spark application    
 4. [Spark Streaming](04-spark-streaming/README.md)
     - Deploy the classification model inside Spark Streaming
 5. [Model Deployment](05-model-deployment/README.md)
@@ -25,3 +31,23 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
 6. [Final Application](06-final-app/README.md) 
     - Assembling the final application: combining the front end and back end
     - Deploying the application to the cluster
+    
+
+## Requirements
+  * Mac OS X or Linux
+  * Java 7
+  * Spark 1.5+
+  * Sparkling Water 1.5.6
+  * Development environment
+  * ?? FIXME Thrift ?
+  * ?? Mongodb ?
+  * ?? Node js ?
+  
+## Goals
+  * use Spark
+  * use Sparkling Water
+  * combine MLLib and Sparkling Water library to write ML flows
+  * write Sparkling Water app
+  * deploy it on Spark cluster
+  
+  
