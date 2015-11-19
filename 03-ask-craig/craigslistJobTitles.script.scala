@@ -22,7 +22,7 @@ import water._
 import java.net.URI
 import java.io.File
 
-val sc: org.apache.spark.SparkContext = _
+//val sc: org.apache.spark.SparkContext = _
 
 // Load and split data based on ",", skip header
 val data = sc.textFile("../data/craigslistJobTitles.csv").filter(line => !line.contains("category")).map(d => d.split(','))
@@ -78,8 +78,13 @@ def computeRareWords(dataRdd : RDD[Array[String]]): Set[String] = {
   rareWords
 }
 
-val labelledWords = data.map(d => (d(0), tokenize(d(1), STOP_WORDS))).filter(s => s._2.length > 0)
-val rareWords = computeRareWords(labelledWords.map(r => r._2))
+val allLabelledWords = data.map(d => (d(0), tokenize(d(1), STOP_WORDS)))
+val rareWords = computeRareWords(allLabelledWords.map(r => r._2))
+// Filter all rare words
+val labelledWords = allLabelledWords.map(row => {
+  val tokens = row._2.filterNot(token => rareWords.contains(token))
+  (row._1, tokens)
+}).filter(row => row._2.length > 0)
 
 val words = labelledWords.map(v => v._2)
 val labels = labelledWords.map(v => v._1)
@@ -103,34 +108,44 @@ def wordToVector (w:String, m: Word2VecModel): Vector = {
   }
 }
 
+def wordsToVector(words: Array[String], model: Word2VecModel): Vector = {
+  val vec = Vectors.dense(
+    divArray(
+      words.map(word => wordToVector(word, model).toArray).reduceLeft(sumArray),
+      words.length))
+  vec
+}
+
+
 //
 // Word2Vec Model
 //
-
 val word2vec = new Word2Vec()
-val model = word2vec.fit(words)
+val word2VecModel = word2vec.fit(words.map(r => r.toSeq))
 
 // Sanity Check
-model.findSynonyms("teacher", 5).foreach(println)
-
-val titleVectors = words.map(x => new DenseVector(
-    divArray(x.map(m => wordToVector(m, model).toArray).
-            reduceLeft(sumArray),x.length)).asInstanceOf[Vector])
+word2VecModel.findSynonyms("teacher", 5).foreach(println)
 
 // Create H2OFrame
 import org.apache.spark.mllib
-case class CRAIGSLIST(target: String, a: mllib.linalg.Vector)
+case class JobPosting(category: String, a: mllib.linalg.Vector)
 
+// Start H2O services
 import org.apache.spark.h2o._
 val h2oContext = new H2OContext(sc).start()
-import h2oContext._
 
-val resultRDD: DataFrame = labels.zip(titleVectors).map(v => CRAIGSLIST(v._1, v._2)).toDF
+val resultRDD: DataFrame = labels.zip(words).map(row => {
+  val label = row._1
+  val tokens = row._2
+  val vectorizedTokens = wordsToVector(tokens, word2VecModel)
+  JobPosting(label, vectorizedTokens)
+}).toDF
 
-val table:H2OFrame = resultRDD
-
+val table: H2OFrame = h2oContext.asH2OFrame(resultRDD, "craigslistTable")
+table.replace(table.find("category"), table.vec("category").toCategoricalVec).remove()
+table.update(null)
 // OPEN FLOW UI
-openFlow
+h2oContext.openFlow
 
 //
 // Build model in Flow
@@ -146,7 +161,9 @@ def exportH2OModel(model : Model[_,_,_], destination: URI): URI = {
   new ObjectTreeBinarySerializer().save(keysToExport, destination)
   destination
 }
-TODO: save
+val gbmModel: _root._hex.tree.gbm.GBMModel = DKV.getGet("gbmModel")
+exportH2OModel(gbmModel, new File("./models/h2omodel.bin").toURI)
+
 
 // Save Spark model
 def exportSparkModel(model: Any, destination: URI): Unit = {
@@ -157,4 +174,5 @@ def exportSparkModel(model: Any, destination: URI): Unit = {
   oos.writeObject(model)
   oos.close
 }
+exportSparkModel(word2VecModel, new File("./models/sparkmodel.bin").toURI)
 
