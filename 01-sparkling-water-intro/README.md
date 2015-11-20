@@ -1,4 +1,4 @@
-# QCon 2105 - Building Machine Learning Applications with Sparkling Water
+# QCon 2015 - Building Machine Learning Applications with Sparkling Water
 
 ## Introduction to Sparkling Water
 
