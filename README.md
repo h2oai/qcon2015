@@ -32,7 +32,7 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
 5. [Spark Streaming and Model Deployment](05-spark-streaming/README.md)
     - Loading a saved H2O binary model
     - Exposing the model via Spark stream
-6. [Spark Streaming and Model Deployment #2](06-pojo-model-deployment)
+6. [Spark Streaming and Model Deployment #2](06-pojo-model-deployment/README.md)
     - Using exported POJO model in Spark stream
 6. [Final Application](07-final-app/README.md) 
     - Assembling the final application: combining the front end and back end
