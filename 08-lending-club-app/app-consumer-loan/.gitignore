@@ -1,0 +1,14 @@
+.gradle
+*.iml
+*.ipr
+*.iws
+
+.Rhistory
+build
+lib/h2o-genmodel.jar
+src/main/java/org/gradle/BadLoanModel.java
+src/main/java/org/gradle/InterestRateModel.java
+tmp
+out
+*.swp
+.DS_Store

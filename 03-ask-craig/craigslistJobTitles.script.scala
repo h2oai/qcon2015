@@ -148,7 +148,7 @@ table.update(null)
 h2oContext.openFlow
 
 //
-// Build model in Flow
+// Build model in Flow and call it "GbmModel"
 //
 
 // Save H2O model
@@ -161,7 +161,7 @@ def exportH2OModel(model : Model[_,_,_], destination: URI): URI = {
   new ObjectTreeBinarySerializer().save(keysToExport, destination)
   destination
 }
-val gbmModel: _root._hex.tree.gbm.GBMModel = DKV.getGet("gbmModel")
+val gbmModel: _root_.hex.tree.gbm.GBMModel = DKV.getGet("GbmModel")
 exportH2OModel(gbmModel, new File("./models/h2omodel.bin").toURI)
 
 
@@ -175,4 +175,18 @@ def exportSparkModel(model: Any, destination: URI): Unit = {
   oos.close
 }
 exportSparkModel(word2VecModel, new File("./models/sparkmodel.bin").toURI)
+
+def exportPOJOModel(model : Model[_, _,_], destination: URI): URI = {
+    val destFile = new File(destination)
+    val fos = new java.io.FileOutputStream(destFile)
+    val writer = new model.JavaModelStreamWriter(false)
+    try {
+      writer.writeTo(fos)
+    } finally {
+      fos.close()
+    }
+    destination
+}
+
+exportPOJOModel(gbmModel, new File("./models/GbmModel.java").toURI)
 

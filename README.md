@@ -39,6 +39,7 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
   * Spark 1.5+
   * Sparkling Water 1.5.6
   * Development environment
+  * Scala SDK 2.10.4 (can be fetch from Ivy cache)
   * ?? FIXME Thrift ?
   * ?? Mongodb ?
   * ?? Node js ?
