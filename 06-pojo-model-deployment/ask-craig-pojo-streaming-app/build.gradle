@@ -12,7 +12,7 @@ apply plugin: 'eclipse'
 
 // Support local launch of application 
 apply plugin: 'application'
-mainClassName = 'water.droplets.AskCraigStreamingApp'
+mainClassName = 'water.droplets.AskCraigPojoStreamingApp'
 //
 // The build script settings to fetch plugins and put them on
 // classpath
@@ -93,6 +93,17 @@ dependencies {
 group = "ai.h2o"
 
 //
+// Additional sources
+//
+sourceSets {
+    main {
+        java {
+            srcDirs += "src/pojo/java"
+        }
+    }
+}
+
+//
 // Setup Scala plugin
 //
 
@@ -154,27 +165,6 @@ shadowJar {
         // Do not forget that Sparkling Water App is intended
         // to run inside Spark environment providing some jars
         // (like hadoop, aws) on classpath
-        include(dependency("ai.h2o:sparkling-water-core_${scalaBinaryVersion}"))
-        include(dependency("ai.h2o:sparkling-water-examples_${scalaBinaryVersion}"))
-        include(dependency("ai.h2o:h2o-core"))
-        include(dependency("ai.h2o:h2o-scala_${scalaBinaryVersion}"))
-        include(dependency("ai.h2o:h2o-app"))
-        include(dependency("ai.h2o:h2o-web"))
-        include(dependency("ai.h2o:h2o-algos"))
-        include(dependency("ai.h2o:h2o-persist-hdfs"))
         include(dependency("ai.h2o:h2o-genmodel"))
-        include(dependency("joda-time:joda-time"))
-        include(dependency("org.joda:joda-convert"))
-        include(dependency("org.javassist:javassist"))
-        include(dependency("gov.nist.math:jama"))
-        include(dependency("com.google.code.gson:gson"))
-        include(dependency("com.google.guava:guava"))
-        include(dependency("ai.h2o:reflections"))
-        include(dependency("ai.h2o:google-analytics-java"))
-        include(dependency("com.github.tony19:named-regexp"))
-
-        include(dependency("org.eclipse.jetty.aggregate:jetty-servlet"))
-        include(dependency("org.eclipse.jetty:jetty-server"))
-        include(dependency("org.eclipse.jetty:jetty-plus:8.1.17.v20150415"))
     }
 }
