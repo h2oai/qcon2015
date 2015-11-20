@@ -1,9 +1,9 @@
 # QCon2015: Build standalone Spark application
 
- - get familiar with standalone Spark application
- - open application in Idea
- - build and run application from Gradle
- - submit application via spark-submit
+ - Get familiar with standalone Spark application
+ - Open, build and run application in IntelliJ IDEA
+ - Build and run application from Gradle
+ - Submit application via `spark-submit`
    
 ## Project structure
  
@@ -58,9 +58,9 @@ $SPARK_HOME/bin/spark-submit --class water.droplets.SparklingWaterDroplet build/
 ```
 
 ## Exercise
-  - try to re-implement Ham Or Spam example or Ask Craig example as standalone application
+  - Try to re-implement Ham Or Spam example or Ask Craig example as standalone application
 
 ## Points to remember
-  - how to develop standalone Spark/Sparkling application
-  - how to deploy Spark application
-  - how to reference a Spark cluster
+  - How to develop standalone Spark/Sparkling standalone application
+  - How to deploy Spark application on Spark cluster.
+  - How to reference a Spark cluster

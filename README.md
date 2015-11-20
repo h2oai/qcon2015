@@ -1,12 +1,13 @@
 # QCon 2015
 
 Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to learn to use Spark, H2O and Sparkling Water to build smart applications driven by machine learning models. The tutorials will go over:
-    - How to clean and munge data in Spark and H2O.
-    - How to read in multiple datasets and join them to provide more features to the machine learning process.
-    - How to use MLlib in conjunction with H2O's library or algorithms to take the best of platforms using Sparkling Water.
-    - How to integrate the scoring engine from your Sparkling Water script into Spark Streaming to produce real-time predictions.
-    - How to deploy smarter applications on top of Spark.
-    - How to deploy simple models
+
+   - How to clean and munge data in Spark and H2O.
+   - How to read in multiple datasets and join them to provide more features to the machine learning process.
+   - How to use MLlib in conjunction with H2O's library or algorithms to take the best of platforms using Sparkling Water.
+   - How to integrate the scoring engine from your Sparkling Water script into Spark Streaming to produce real-time predictions.
+   - How to deploy smarter applications on top of Spark.
+   - How to deploy simple models
 
 ## Outline 
 
@@ -26,12 +27,12 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
 3. [Ask Craig(list) Application](03-ask-craig/README.md)
     - Build a classifier to label job description into appropriate industry categories
     - Deploy it as Spark application    
-4. [Spark Streaming](04-spark-streaming/README.md)
+4. [Standalone application concepts](04-standalone-app/README.md)
     - Deploy the classification model inside Spark Streaming
-5. [Model Deployment](05-model-deployment/README.md)
-    - Exporting the H2O model in binary form
+5. [Spark Streaming and Model Deployment](05-spark-streaming/README.md)
+    - Loading a saved H2O binary model
     - Exposing the model via Spark stream
-6. [Model Deployment #2)](06-pojo-model-deployment)
+6. [Spark Streaming and Model Deployment #2](06-pojo-model-deployment)
     - Using exported POJO model in Spark stream
 6. [Final Application](07-final-app/README.md) 
     - Assembling the final application: combining the front end and back end

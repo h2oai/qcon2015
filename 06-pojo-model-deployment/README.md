@@ -1,14 +1,13 @@
 #QCon2015: Using generated models inside Spark Stream
 
-  - deploy save POJO model as Spark stream
+  - Deploy a saved POJO model as Spark stream
   
 ## Steps
 
- - create a standalone application
- - instantiate H2O Pojo model
- - load Spark model from disk
- - initialize Spark Streaming context
- - create a stream for processing incoming messages
+ - Create a standalone application
+ - Instantiate H2O POJO model
+ - Initialize Spark Streaming context
+ - Create a stream for processing incoming messages using the model
   
 0. Explanation
    - Where is POJO?
@@ -109,3 +108,7 @@
   - How would you expose POJO in different way?
   
 
+## Points to remember
+  - H2O model POJO is independent on H2O runtime
+  - POJO API for scoring
+  

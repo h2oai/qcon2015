@@ -1,17 +1,17 @@
 #QCon2015: Using generated models inside Spark Stream
 
-  - create and start Spark stream
-  - deploy saved binary models as Spark stream
-  - load Spark model from disk
-  - load H2O model from disk
+  - Create and start Spark stream
+  - Load Spark model from disk
+  - Load H2O model from disk
+  - Deploy saved binary models as Spark stream
   
 ## Steps
 
- - create a standalone application
- - load H2O model from disk
- - load Spark model from disk
- - initialize Spark Streaming context
- - create a stream for processing incoming messages
+ - Create a standalone application
+ - Load H2O model from disk
+ - Load Spark model from disk
+ - Initialize Spark Streaming context
+ - Create a stream for processing incoming messages
 
 1. Start with template of standalone application
     ```scala
@@ -106,7 +106,12 @@
 8. Reuse `tokenize` and `wordsToVector` methods from previous demos
   
 ## Exercise
-  - How would you implement re-training mechanism?
+  - How would you implement model re-training mechanism?
   - How would you stop stream?
+  
+## Points to remember
+  - Spark streaming: stream definition
+  - H2O model deploy
+  - H2O model scoring API
   
 

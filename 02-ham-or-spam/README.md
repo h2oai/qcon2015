@@ -1,4 +1,4 @@
-# QCon 2105: Ham Or Spam
+# QCon 2015: Ham Or Spam
 
  - Use Spark API
  - Use Sparkling Water API
@@ -252,6 +252,11 @@
 
 
 ## Exercise
- - Try to use different H2O model - for example, GBM
+ - Try to use different H2O model - for example, GBM.
+ 
+## Points to remember
+ - Spark Tf-IDF algorithm
+ - Conceptual API to call H2O algorithms
+ - Principle of training and using models for prediction 
  
 

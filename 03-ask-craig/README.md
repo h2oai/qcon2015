@@ -1,9 +1,9 @@
 # QCon2015: Craigslist job titles categorization
 
   - Use Word2Vec model from Spark
-  - Use GBM model 
+  - Use GBM model from H2O
   - Get familiar with H2O Flow UI
-  - Model export
+  - Different kinds of model export
 
 ## Requirements
   - Sparkling Shell
@@ -236,11 +236,11 @@
 
 ## Exercise
   - Save model directly from Flow UI
-  - Try to restart Sparkling Shell and reload models (see directory [models](models))
+  - Try to restart Sparkling Shell and reload exported models (see directory [models](models))
 
 ## Points to remember
   - H2O Model Builder API
   - How to export Spark model
   - How to export H2O model in binary form
-  - How to export H2O model as indendent POJO
+  - How to export H2O model as a POJO
   

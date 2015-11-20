@@ -27,7 +27,7 @@ tar -xvf spark-1.5.2-bin-hadoop2.6.tgz
 cd spark-1.5.2-bin-hadoop2.6
 export SPARK_HOME=`pwd`
 ```
-Note: For your convenience you can set your SPARK_HOME environmental variable in your bashrc file to avoid having to set the variable when opening new terminal sessions.
+Note: For your convenience you can set your `SPARK_HOME` environmental variable in your `.bashrc` file to avoid having to set the variable when opening new terminal sessions.
 
 <a name="running_spark_shell"></a>
 ## Running Spark Shell
