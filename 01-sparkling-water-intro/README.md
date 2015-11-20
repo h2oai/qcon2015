@@ -21,6 +21,7 @@
 To install Spark simply uncompress the tar file in the install folder and set your SPARK_HOME to the unzipped directory.
 
 ```
+cd Spark
 tar -xvf spark-1.5.2-bin-hadoop2.6.tgz
 cd spark-1.5.2-bin-hadoop2.6
 export SPARK_HOME=`pwd`
@@ -57,7 +58,7 @@ To read in data into Spark, you can either read files in text format or import f
 
 ```
 //Import SMS data
-val smsData = sc.textFile("../../data/smsData.txt")
+val smsData = sc.textFile("../../qcon2015/data/smsData.txt")
 ```
 
 ### Exercise
@@ -96,6 +97,7 @@ Did you get **1014**?
 To install Sparkling Water simply unzip the zipped file in the install folder and set your SPARKLING_HOME to the unzipped directory.
 
 ```
+cd SparklingWater
 unzip sparkling-water-1.5.6.zip
 cd sparkling-water-1.5.6
 export SPARKLING_HOME=`pwd`
@@ -171,14 +173,4 @@ To open the launched the H2O Web UI or Flow:
 openFlow
 ```
 
-
-### Read in data
-
-To read in data into Spark, you can either read files in text format or import files as data frames. 
-
-```
-//Import SMS data
-val smsData = sc.textFile("../../data/smsData.txt")
-```
-
-### Exercise 
+To access the Spark Application Master navigate to [localhost:4040](localhost:4040) in your web browser.
