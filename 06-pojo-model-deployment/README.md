@@ -1,19 +1,20 @@
 #QCon2015: Using generated models inside Spark Stream
 
-  - create and start Spark stream
-  - deploy saved binary models as Spark stream
-  - load Spark model from disk
-  - load H2O model from disk
+  - deploy save POJO model as Spark stream
   
 ## Steps
 
  - create a standalone application
- - load H2O model from disk
+ - instantiate H2O Pojo model
  - load Spark model from disk
  - initialize Spark Streaming context
- - create a stream by processing 
+ - create a stream for processing incoming messages
+  
+0. Explanation
+   - Where is POJO?
+   - What are differences between binary model and POJO? 
 
-1. Start with template of standalone application
+1. Start with template of standalone application from previous example
 ```scala
 /**
   * Streaming app using saved models.
@@ -37,22 +38,12 @@ val sqlContext = new SQLContext(sc)
 
 // We need also streaming context
 val ssc = new StreamingContext(sc, Seconds(10))
-
-// Start H2O services
-val h2oContext = new H2OContext(sc).start()
 ```
 
-3. Load H2O Model
+3. Instantiate H2O POJO model directly or via reflection
 ```scala
-  def loadH2OModel[M <: Model[_, _, _]](source: URI) : M = {
-    val l = new ObjectTreeBinarySerializer().load(source)
-    l.get(0).get().asInstanceOf[M]
-  }
-```
-and then
-```scala
-// Load model
-val h2oModel: Model[_, _, _] = loadH2OModel(new File("../models/h2omodel.bin").toURI)
+val h2oModel: GenModel = Class.forName("GbmModel").newInstance().asInstanceOf[GenModel]
+val classNames = h2oModel.getDomainValues(h2oModel.getResponseIdx)
 ```
 
 4. Load Spark Word2VecModel
@@ -81,32 +72,40 @@ val jobTitlesStream = ssc.socketTextStream("localhost", 9999)
 ```scala
 	   // Classify incoming messages
       jobTitlesStream.filter(!_.isEmpty)
-        .map(jobTitle => (jobTitle, classify(jobTitle, modelId, sparkModel)))
+        .map(jobTitle => (jobTitle, classify(jobTitle, model, sparkModel)))
         .map(pred => "\"" + pred._1 + "\" = " + show(pred._2, classNames))
         .print()
 ``` 
 
-7. Implement classify method
+7. Implement classify method for POJO model
 ```scala
-  def classify(jobTitle: String, modelId: String, w2vModel: Word2VecModel): (String, Array[Double]) = {
-    val model : Model[_, _, _] = water.DKV.getGet(modelId)
+def classify(jobTitle: String, model: GenModel, w2vModel: Word2VecModel): (String, Array[Double]) = {
+  import CraigsListJobTitles._
+  val tokens = tokenize(jobTitle, STOP_WORDS)
+  if (tokens.length == 0)
+    EMPTY_PREDICTION
+  else {
+    val vec = wordsToVector(tokens, w2vModel)
 
-    import CraigsListJobTitles._
-    val tokens = tokenize(jobTitle, STOP_WORDS)
-    if (tokens.length == 0)
-      EMPTY_PREDICTION
-    else {
-      val vec = wordsToVector(tokens, w2vModel)
-	   // Use helper	
-      hex.ModelUtils.classify(vec.toArray, model)
-    }
+    val prediction = new Array[Double](model.getNumResponseClasses + 1)
+    // Low-leve API
+    model.score0(vec.toArray, prediction)
+    (model.getDomainValues(model.getResponseIdx)(prediction(0).asInstanceOf[Int]), prediction slice (1, prediction.length))
   }
+}
+```
+
+8. Simple show method
+```scala
+def show(pred: (String, Array[Double]), classNames: Array[String]): String = {
+    val probs = classNames.zip(pred._2).map(v => f"${v._1}: ${v._2}%.3f")
+    pred._1 + ": " + probs.mkString("[", ", ", "]")
+}
 ```
 
 8. Reuse `tokenize` and `wordsToVector` methods from previous demos
   
 ## Exercise
-  - How would you implement re-training mechanism?
-  - How would you stop stream?
+  - How would you expose POJO in different way?
   
 

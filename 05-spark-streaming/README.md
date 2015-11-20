@@ -11,7 +11,7 @@
  - load H2O model from disk
  - load Spark model from disk
  - initialize Spark Streaming context
- - create a stream by processing 
+ - create a stream for processing incoming messages
 
 1. Start with template of standalone application
 ```scala
