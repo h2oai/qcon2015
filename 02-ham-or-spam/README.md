@@ -252,6 +252,6 @@
 
 
 ## Exercise
- - try to use different H2O model - for example, GBM
+ - Try to use different H2O model - for example, GBM
  
 
