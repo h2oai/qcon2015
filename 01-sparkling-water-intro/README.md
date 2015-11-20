@@ -16,6 +16,7 @@
  - [Sparkling Water 1.5.6](http://h2o-release.s3.amazonaws.com/sparkling-water/rel-1.5/6/index.html)
  - [Datasets](https://raw.githubusercontent.com/h2oai/sparkling-water/master/examples/smalldata/smsData.txt) 
 
+<a name="installation_of_spark"></a>
 ## Installation of Spark
 
 To install Spark simply uncompress the tar file in the install folder and set your SPARK_HOME to the unzipped directory.
@@ -28,6 +29,7 @@ export SPARK_HOME=`pwd`
 ```
 Note: For your convenience you can set your SPARK_HOME environmental variable in your bashrc file to avoid having to set the variable when opening new terminal sessions.
 
+<a name="running_spark_shell"></a>
 ## Running Spark Shell
 
 The Spark shell comes with your installation with Spark and is a great way to learn the API. The interactive interface provides instant feedback to the users' code. You will need to write Scala code in the Spark shell but because it runs on a Java VM you will be able to use existing Java libraries or attach jar files to your Spark environment. 
@@ -92,6 +94,8 @@ hamData.count
 ```
 Did you get **1014**?
 
+
+<a name="installation_of_sparkling"></a>
 ## Installation of Sparkling Water
 
 To install Sparkling Water simply unzip the zipped file in the install folder and set your SPARKLING_HOME to the unzipped directory.
@@ -104,6 +108,7 @@ export SPARKLING_HOME=`pwd`
 ```
 Note: For your convenience you can set your SPARKLING_HOME environmental variable in your bashrc file to avoid having to set the variable when opening new terminal sessions.
 
+<a name="basic_architecture"></a>
 ## Basic Architecture
 
 The integration of H2O with Spark's ecosystem provides environment for the user to use H2O data structures and algorithms with Spark's API. The result is a platform for building smarter applications. Similarly to launching a Spark cluster, launching a Sparkling Water cluster essentially requires starting a driver instance that launches the specified number of worker nodes and the worker nodes will launch the Spark executor JVMs with H2O.
@@ -119,6 +124,7 @@ Converting in the opposite direction (from RDD to H2OFrame) introduces data dupl
 ![data_structures](images/data_structures.jpg)
 
 
+<a name="hands_on"></a>
 ## Hands On Demo of Sparkling Water
 
 Your installation of Sparkling Water comes preloaded with a few Sparkling Water workflows and we can examine the code more cloesly but let's start by submitting one of these jobs to Spark just to run through an example.
@@ -142,7 +148,7 @@ The final output from the app should be a text that looks like a text from a fri
 "We tried to contact you re your reply to our offer of a Video Handset? 750 anytime any networks mins? UNLIMITED TEXT?" is SPAM
 ```
 
-
+<a name="run_it_yourself"></a>
 ## Running Sparkling Shell
 
 Sparkling shell is essentially running `spark-shell` with the added H2O jar file. Sparkling shell will give you all the interactive scripting capabilities of spark shell with the addition of being able to create a H2OContext and launch a H2O instance in the Spark executor JVM.
@@ -173,4 +179,4 @@ To open the launched the H2O Web UI or Flow:
 openFlow
 ```
 
-To access the Spark Application Master navigate to [localhost:4040](localhost:4040) in your web browser.
+To access the Spark Application Master navigate to [http://localhost:4040](http://localhost:4040) in your web browser.
