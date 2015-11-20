@@ -31,11 +31,14 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
 5. [Model Deployment](05-model-deployment/README.md)
     - Exporting the H2O model in binary form
     - Exposing the model via Spark stream
-6. [Model Deployment #2 (without H2O)](06-pojo-model-deployment)
-    - Using
-6. [Final Application](06-final-app/README.md) 
+6. [Model Deployment #2)](06-pojo-model-deployment)
+    - Using exported POJO model in Spark stream
+6. [Final Application](07-final-app/README.md) 
     - Assembling the final application: combining the front end and back end
-    - Deploying the application to the cluster
+7. [Lending Club Example](08-lending-club-app/README.md)
+    - A smart app predicting loan interest
+    - Off-line training pipeline driven from R
+    - POJO models exposed via REST API
     
 
 ## Requirements
@@ -45,7 +48,7 @@ Materials for the San Francisco QConf 2015 Workshop. The goal for the day is to 
   * Sparkling Water 1.5.6
   * IntelliJ IDEA development environment
   * Scala SDK 2.10.4 for IDEA (can be fetch from Ivy cache)
-  * Maven dependencies (will be fetch by Gradle)
+  * Maven dependencies (fetch by Gradle)
   
 ## Goals
   * Get familiar with Spark
