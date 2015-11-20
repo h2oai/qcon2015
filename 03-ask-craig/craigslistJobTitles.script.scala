@@ -1,5 +1,5 @@
 /**
- *  * Craigslist example
+ *  Craigslist example
  *
  * It predicts job category based on job description (called "job title").
  *
@@ -22,8 +22,6 @@ import water._
 import java.net.URI
 import java.io.File
 
-//val sc: org.apache.spark.SparkContext = _
-
 // Load and split data based on ",", skip header
 val data = sc.textFile("../data/craigslistJobTitles.csv").filter(line => !line.contains("category")).map(d => d.split(','))
 
@@ -42,12 +40,6 @@ val labelCounts = jobCategories.map(n => (n, 1)).reduceByKey(_+_).collect.mkStri
 (customerservice,2319)
 (foodbeverage,2495)
 */
-
-// All strings which are not useful for text-mining
-val STOP_WORDS = Set("ax","i","you","edu","s","t","m","subject","can","lines","re","what"
-    ,"there","all","we","one","the","a","an","of","or","in","for","by","on"
-    ,"but", "is", "in","a","not","with", "as", "was", "if","they", "are", "this", "and", "it", "have"
-    , "from", "at", "my","be","by","not", "that", "to","from","com","org","like","likes","so")
 
 // Define tokenizer function
 def tokenize(line: String, stopWords: Set[String]): Array[String] = {
@@ -77,6 +69,12 @@ def computeRareWords(dataRdd : RDD[Array[String]]): Set[String] = {
     .toSet
   rareWords
 }
+
+// All strings which are not useful for text-mining
+val STOP_WORDS = Set("ax","i","you","edu","s","t","m","subject","can","lines","re","what"
+    ,"there","all","we","one","the","a","an","of","or","in","for","by","on"
+    ,"but", "is", "in","a","not","with", "as", "was", "if","they", "are", "this", "and", "it", "have"
+    , "from", "at", "my","be","by","not", "that", "to","from","com","org","like","likes","so")
 
 val allLabelledWords = data.map(d => (d(0), tokenize(d(1), STOP_WORDS)))
 val rareWords = computeRareWords(allLabelledWords.map(r => r._2))
@@ -161,6 +159,7 @@ def exportH2OModel(model : Model[_,_,_], destination: URI): URI = {
   new ObjectTreeBinarySerializer().save(keysToExport, destination)
   destination
 }
+// Get model from H2O DKV
 val gbmModel: _root_.hex.tree.gbm.GBMModel = DKV.getGet("GbmModel")
 exportH2OModel(gbmModel, new File("./models/h2omodel.bin").toURI)
 

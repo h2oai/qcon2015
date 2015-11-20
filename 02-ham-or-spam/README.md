@@ -1,4 +1,8 @@
-# QCon 2105 - Building Machine Learning Applications with Sparkling Water
+# QCon 2105: Ham Or Spam
+
+ - Use Spark API
+ - Use Sparkling Water API
+ - Get familiar with Spark shell
 
 ## Requirements
  
@@ -8,11 +12,7 @@
  - [SMS dataset](../data/smsData.txt) 
  
 
-## Goal
- - use Spark API
- - use Sparkling Water API
- - be familiar with Spark shell
- 
+
 ## Machine Learning Workflow
 
 **Goal**: For a given text message, identify if it is spam or not.
