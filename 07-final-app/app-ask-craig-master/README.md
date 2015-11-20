@@ -11,6 +11,7 @@ http://h2o.ai/blog/2015/07/ask-craig-sparkling-water-2/
 ### Preconditions
 
 1. brew install mongodb
+2. brew install thrift
 
 ### Window 1
 
