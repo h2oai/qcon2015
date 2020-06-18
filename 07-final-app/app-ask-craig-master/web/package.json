@@ -34,7 +34,7 @@
     "coffee-script": "^1.9.3",
     "fluid-lang": "0.0.5",
     "mongodb": "^2.0.42",
-    "thrift": "^0.9.2",
+    "thrift": "^0.13.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
